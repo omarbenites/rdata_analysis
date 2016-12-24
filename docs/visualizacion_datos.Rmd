@@ -1,0 +1,48 @@
+---
+title: "Visualizacion_de_datos"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Visualizacion de datos
+
+Un antiguo proverbio chino decia: **Una imagen vale mas que mil palabras**. En terminos de analisis, podemos decir que una visualización vale más que mil explicaciones. Un proceso importante durante el análisis de datos es la visualización de datos y/o información; el cual tiene como objetivo resumir
+en un gráfico las tendencias o comportamientos de nuestros datos.
+
+En este documento trataremos explicaremos el uso de diferentes tipos de graficos, asi como las ventajas y las desventajas que tiene cada uno aplicandolo a diferentes casos.  
+
+Antes de empezar, primero haremos uso de la libreria agricolae
+
+```{r, message=FALSE}
+library(agricolae)
+library(dplyr)
+library(tidyr)
+```
+
+
+
+### Diagrama de Barras o Barplot
+
+##### Proposito: 
+
+Mayormente usamos este grafico cuando tenemos datos de medias.
+
+
+
+```{r cars}
+data('yacon')
+datos <- yacon
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
