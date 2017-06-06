@@ -1,0 +1,68 @@
+---
+title: "Discrete Random Variables"
+output:
+  html_notebook: default
+  html_document: default
+---
+
+# Random Variable
+A random variable is a function which assign a value from the sample space to real numbers. It relates the value of the probability associated with an event in the sample space.
+
+
+## Bernoulli Random Variable
+
+Consider the tos of a coin, which comes up a head with probability *p*, and a tail with probability *1-p*. The *Bernoulli* random variable takes the two values 1 and 0, depending on whether the outcome is a head or a tail:
+
+
+$$ X = {1, head \brace 0, tail} $$ 
+Its PMF is,
+
+$$ p_{X}{k} = {p, k=1 \brace 1-p, k=0}  $$
+
+
+## Binomial Random Variable
+
+A coin is tossed n times. At each toss, the coin comes up a head with probability *p*, and a tail with probability *1-p*, independent of prior tosses. Let *X* the number of heads in the n-toss sequence. We refer to *X* as a *binomial* random variable with parameters *n* and *p*. The *PMF* of *X* consist of the binomial probabilities that were:
+
+
+$$p_{X}(k) = P(X = k)= \binom{n}{k}p^{k}(1-p){n-k}$$
+Donde $$ k = 0,1,...,n $$
+
+
+### Problem
+Suppose there are twelve multiple choice questions in an English class quiz. Each question has five possible answers, and only one of them is correct. Find the probability of having four or less correct answers if a student attempts to answer every question at random.
+
+### Solution
+
+El espacio muestral es *n = 12* (twelve questions). Dado que son 5 alternativas para cada pregunta, la posibilidad de responder de forma correcta (y aleatoria) es *1/5=0.2*.
+
+Queremos encontrar 4 o menos respuestas correctas:
+P(X=4) + P(X=3) + P(X=2) + P(X=1) + P(X=0). Es decir, tener 4 respuesta correctas, 3 respuestas correctas, 2 respuestas correctas,..., 0 o ninguna respuesta correcta. 
+
+Calculemos primero para 4 respuestas correctas:
+dbinom(x = 4, p = 0.2, n = 12)
+
+```{r, eval=TRUE}
+x <- dbinom(x = 4, p = 0.2, size = 12)
+x
+```
+
+Calculemos el resto de probabilidades:
+
+```{r, eval=TRUE}
+cum_x <- dbinom(0, size=12, prob=0.2) + dbinom(1, size=12, prob=0.2) + dbinom(2, size=12, prob=0.2) + dbinom(3, size=12, prob=0.2) + dbinom(4, size=12, prob=0.2) 
+cum_x
+```
+
+Alternativamente 
+
+```{r,eval=TRUE}
+cum_x <- pbinom(q = 4, size= 12, prob = 0.2)
+cum_x
+```
+
+Por lo tanto la posibilidad de responder 4 o menos preguntas correctamente de forma aleatoria un cuesteonario de 12 preguntas es *0.9274445*
+
+
+## Geometric Random Variables
+
