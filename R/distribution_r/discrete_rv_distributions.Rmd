@@ -66,3 +66,15 @@ Por lo tanto la posibilidad de responder 4 o menos preguntas correctamente de fo
 
 ## Geometric Random Variables
 
+```{r,eval=TRUE}
+case = c(0,1,2,3,4)
+point = c(0.06871948, 0.2061584, 0.2834678, 0.2362232, 0.1328756)
+dat <- data.frame(case, point, stringsAsFactors = FALSE)
+plot(dat$case, dat$point, type = "h")
+```
+
+
+
+
+
+
