@@ -184,15 +184,92 @@ $(document).ready(function () {
 <div id="binomial-random-variable" class="section level2">
 <h2>Binomial Random Variable</h2>
 <p>A coin is tossed n times. At each toss, the coin comes up a head with probability <em>p</em>, and a tail with probability <em>1-p</em>, independent of prior tosses. Let <em>X</em> the number of heads in the n-toss sequence. We refer to <em>X</em> as a <em>binomial</em> random variable with parameters <em>n</em> and <em>p</em>. The <em>PMF</em> of <em>X</em> consist of the binomial probabilities that were:</p>
-<p><span class="math display">\[p_{X}(k) = P(X = k)= \binom{n}{k}p^{k}(1-p){n-k}\]</span> Donde <span class="math display">\[ k = 0,1,...,n \]</span></p>
-<div id="problem" class="section level3">
-<h3>Problem</h3>
-<p>Suppose there are twelve multiple choice questions in an English class quiz. Each question has five possible answers, and only one of them is correct. Find the probability of having four or less correct answers if a student attempts to answer every question at random.</p>
+<p><span class="math display">\[p_{X}(k) = P(X = k)= \binom{n}{k}p^{k}(1-p)^{n-k}\]</span> Donde <span class="math display">\[ k = 0,1,...,n \]</span></p>
+<div id="problem-1.1" class="section level3">
+<h3>Problem 1.1</h3>
+<p>In 10 trials with success probability 0.5, what is the probability that no more than 4 success wil be observed?</p>
 </div>
 <div id="solution" class="section level3">
 <h3>Solution</h3>
+<p>Here, n=10, p = 0.5, and we want to calculate</p>
+<p><span class="math display">\[ P(Y&lt;=4) = F(4)  \]</span></p>
+<p>We do so in R as follows:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzIDwtIHBiaW5vbShxID0gNCwgc2l6ZT0gMTAsIHByb2IgPSAwLjUpXG5yZXNcbmBgYCJ9 -->
+<pre class="r"><code>res &lt;- pbinom(q = 4, size= 10, prob = 0.5)
+res</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="example-1.2" class="section level3">
+<h3>Example 1.2</h3>
+<p>In 12 trials with success probability 0.3, what is the probability that more than 6 successes will be observed?</p>
+</div>
+<div id="solution-1" class="section level3">
+<h3>Solution</h3>
+<p>Here, n = 12, prob=0.3 and P(6&lt;Y).</p>
+<p>Since <span class="math inline">\(P(6&lt;Y)\)</span>, this can be traslated <span class="math inline">\(P(6&lt;Y) = 1 - P(Y&lt;=6) = 1 - F(6).\)</span></p>
+<p>We do this so in R as follows:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzIDwtIDEtcGJpbm9tKHEgPSA2ICwgc2l6ZT0gMTIsIHByb2IgPSAwLjMpXG5yZXNcbmBgYCJ9 -->
+<pre class="r"><code>res &lt;- 1-pbinom(q = 6 , size= 12, prob = 0.3)
+res</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDM4NjAwODRcbiJ9 -->
+<pre><code>[1] 0.03860084</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="problema-1.3" class="section level3">
+<h3>Problema 1.3</h3>
+<p>In 15 trials with success probability 0.6, what is the probability that at least 5 but no more than 10 successes will be observed?</p>
+</div>
+<div id="solution-2" class="section level3">
+<h3>Solution</h3>
+<p>Here n = 15, prob=0.6, and we want to calculate:</p>
+<p><span class="math inline">\(P(5=&lt;Y&lt;=10)\)</span>, this can be traslated to <span class="math inline">\(P(5&lt;=Y&lt;=10) = P(X&lt;=10) - P(x&gt;4)= F(10)-F(4)\)</span></p>
+<p>We do so in R as follows:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzIDwtIHBiaW5vbSgxMCwgc2l6ZSA9IDE1LCBwcm9iID0gMC42KSAtIHBiaW5vbSg0LCBzaXplID0gMTUsIHByb2IgPSAwLjYpIFxucmVzXG5gYGAifQ== -->
+<pre class="r"><code>res &lt;- pbinom(10, size = 15, prob = 0.6) - pbinom(4, size = 15, prob = 0.6) 
+res</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuNzczMzc0NlxuIn0= -->
+<pre><code>[1] 0.7733746</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="problem-1.4" class="section level3">
+<h3>Problem 1.4</h3>
+<p>In 20 trials with success probability 0.9, what is the probability that exactly 16 successes will be observed?</p>
+</div>
+<div id="solution-3" class="section level3">
+<h3>Solution</h3>
+<p><span class="math inline">\(P(X=16)=P(Y&lt;=16)-P(Y&lt;=15)=F(16)-F(15)\)</span></p>
+<p>We do so in R as follows:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzIDwtIHBiaW5vbSgxNiwgc2l6ZSA9IDIwLCBwcm9iID0gMC45KSAtIHBiaW5vbSgxNSwgc2l6ZSA9IDIwLCBwcm9iPTAuOSlcbnJlc1xuYGBgIn0= -->
+<pre class="r"><code>res &lt;- pbinom(16, size = 20, prob = 0.9) - pbinom(15, size = 20, prob=0.9)
+res</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="problem-1.5" class="section level3">
+<h3>Problem 1.5</h3>
+<p>Suppose there are twelve multiple choice questions in an English class quiz. Each question has five possible answers, and only one of them is correct. Find the probability of having four or less correct answers if a student attempts to answer every question at random.</p>
+</div>
+<div id="solution-4" class="section level3">
+<h3>Solution</h3>
 <p>El espacio muestral es <em>n = 12</em> (twelve questions). Dado que son 5 alternativas para cada pregunta, la posibilidad de responder de forma correcta (y aleatoria) es <em>1/5=0.2</em>.</p>
-<p>Queremos encontrar 4 o menos respuestas correctas: P(X=4) + P(X=3) + P(X=2) + P(X=1) + P(X=0). Es decir, tener 4 respuesta correctas, 3 respuestas correctas, 2 respuestas correctas,…, 0 o ninguna respuesta correcta.</p>
+<p>Queremos encontrar 4 o menos (P(X&lt;=4)) respuestas correctas: P(X=4) + P(X=3) + P(X=2) + P(X=1) + P(X=0). Es decir, tener 4 respuesta correctas, 3 respuestas correctas, 2 respuestas correctas,…, 0 o ninguna respuesta correcta.</p>
 <p>Calculemos primero para 4 respuestas correctas: dbinom(x = 4, p = 0.2, n = 12)</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -205,13 +282,10 @@ x</code></pre>
 <p>Calculemos el resto de probabilidades:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGJpbm9tKDQsIHNpemU9MTIsIHByb2I9MC4yKVxuXG5gYGAifQ== -->
-<pre class="r"><code>dbinom(4, size=12, prob=0.2)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY3VtX3ggPC0gZGJpbm9tKDAsIHNpemU9MTIsIHByb2I9MC4yKSArIGRiaW5vbSgxLCBzaXplPTEyLCBwcm9iPTAuMikgKyBkYmlub20oMiwgc2l6ZT0xMiwgcHJvYj0wLjIpICsgZGJpbm9tKDMsIHNpemU9MTIsIHByb2I9MC4yKSArIGRiaW5vbSg0LCBzaXplPTEyLCBwcm9iPTAuMikgXG5jdW1feFxuYGBgIn0= -->
+<pre class="r"><code>cum_x &lt;- dbinom(0, size=12, prob=0.2) + dbinom(1, size=12, prob=0.2) + dbinom(2, size=12, prob=0.2) + dbinom(3, size=12, prob=0.2) + dbinom(4, size=12, prob=0.2) 
+cum_x</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMTMyODc1NlxuIn0= -->
-<pre><code>[1] 0.1328756</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Alternativamente</p>
@@ -221,28 +295,26 @@ x</code></pre>
 <pre class="r"><code>cum_x &lt;- pbinom(q = 4, size= 12, prob = 0.2)
 cum_x</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuOTI3NDQ0NVxuIn0= -->
-<pre><code>[1] 0.9274445</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Por lo tanto la posibilidad de responder 4 o menos preguntas correctamente de forma aleatoria un cuesteonario de 12 preguntas es <em>0.9274445</em></p>
-</div>
-</div>
-<div id="geometric-random-variables" class="section level2">
-<h2>Geometric Random Variables</h2>
+<p>El grafico de la distribucion binomial</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-plot-begin eyJjb25kaXRpb25zIjpbXSwiaGVpZ2h0Ijo0MzIuNjMyOSwic2l6ZV9iZWhhdmlvciI6MCwid2lkdGgiOjcwMH0= -->
-<p><img src="data:image/png;base64,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" /></p>
-<!-- rnb-plot-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2FzZSA9IGMoMCwxLDIsMyw0KVxucG9pbnQgPSBjKDAuMDY4NzE5NDgsIDAuMjA2MTU4NCwgMC4yODM0Njc4LCAwLjIzNjIyMzIsIDAuMTMyODc1NilcbmRhdCA8LSBkYXRhLmZyYW1lKGNhc2UsIHBvaW50LCBzdHJpbmdzQXNGYWN0b3JzID0gRkFMU0UpXG5wbG90KGRhdCRjYXNlLCBkYXQkcG9pbnQsIHR5cGUgPSBcImhcIilcbmBgYCJ9 -->
+<pre class="r"><code>case = c(0,1,2,3,4)
+point = c(0.06871948, 0.2061584, 0.2834678, 0.2362232, 0.1328756)
+dat &lt;- data.frame(case, point, stringsAsFactors = FALSE)
+plot(dat$case, dat$point, type = &quot;h&quot;)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRpc2NyZXRlIFJhbmRvbSBWYXJpYWJsZXMiDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQNCiAgaHRtbF9kb2N1bWVudDogZGVmYXVsdA0KLS0tDQoNCiMgUmFuZG9tIFZhcmlhYmxlDQpBIHJhbmRvbSB2YXJpYWJsZSBpcyBhIGZ1bmN0aW9uIHdoaWNoIGFzc2lnbiBhIHZhbHVlIGZyb20gdGhlIHNhbXBsZSBzcGFjZSB0byByZWFsIG51bWJlcnMuIEl0IHJlbGF0ZXMgdGhlIHZhbHVlIG9mIHRoZSBwcm9iYWJpbGl0eSBhc3NvY2lhdGVkIHdpdGggYW4gZXZlbnQgaW4gdGhlIHNhbXBsZSBzcGFjZS4NCg0KDQojIyBCZXJub3VsbGkgUmFuZG9tIFZhcmlhYmxlDQoNCkNvbnNpZGVyIHRoZSB0b3Mgb2YgYSBjb2luLCB3aGljaCBjb21lcyB1cCBhIGhlYWQgd2l0aCBwcm9iYWJpbGl0eSAqcCosIGFuZCBhIHRhaWwgd2l0aCBwcm9iYWJpbGl0eSAqMS1wKi4gVGhlICpCZXJub3VsbGkqIHJhbmRvbSB2YXJpYWJsZSB0YWtlcyB0aGUgdHdvIHZhbHVlcyAxIGFuZCAwLCBkZXBlbmRpbmcgb24gd2hldGhlciB0aGUgb3V0Y29tZSBpcyBhIGhlYWQgb3IgYSB0YWlsOg0KDQoNCiQkIFggPSB7MSwgaGVhZCBcYnJhY2UgMCwgdGFpbH0gJCQgDQpJdHMgUE1GIGlzLA0KDQokJCBwX3tYfXtrfSA9IHtwLCBrPTEgXGJyYWNlIDEtcCwgaz0wfSAgJCQNCg0KDQojIyBCaW5vbWlhbCBSYW5kb20gVmFyaWFibGUNCg0KQSBjb2luIGlzIHRvc3NlZCBuIHRpbWVzLiBBdCBlYWNoIHRvc3MsIHRoZSBjb2luIGNvbWVzIHVwIGEgaGVhZCB3aXRoIHByb2JhYmlsaXR5ICpwKiwgYW5kIGEgdGFpbCB3aXRoIHByb2JhYmlsaXR5ICoxLXAqLCBpbmRlcGVuZGVudCBvZiBwcmlvciB0b3NzZXMuIExldCAqWCogdGhlIG51bWJlciBvZiBoZWFkcyBpbiB0aGUgbi10b3NzIHNlcXVlbmNlLiBXZSByZWZlciB0byAqWCogYXMgYSAqYmlub21pYWwqIHJhbmRvbSB2YXJpYWJsZSB3aXRoIHBhcmFtZXRlcnMgKm4qIGFuZCAqcCouIFRoZSAqUE1GKiBvZiAqWCogY29uc2lzdCBvZiB0aGUgYmlub21pYWwgcHJvYmFiaWxpdGllcyB0aGF0IHdlcmU6DQoNCg0KJCRwX3tYfShrKSA9IFAoWCA9IGspPSBcYmlub217bn17a31wXntrfSgxLXApe24ta30kJA0KRG9uZGUgJCQgayA9IDAsMSwuLi4sbiAkJA0KDQoNCiMjIyBQcm9ibGVtDQpTdXBwb3NlIHRoZXJlIGFyZSB0d2VsdmUgbXVsdGlwbGUgY2hvaWNlIHF1ZXN0aW9ucyBpbiBhbiBFbmdsaXNoIGNsYXNzIHF1aXouIEVhY2ggcXVlc3Rpb24gaGFzIGZpdmUgcG9zc2libGUgYW5zd2VycywgYW5kIG9ubHkgb25lIG9mIHRoZW0gaXMgY29ycmVjdC4gRmluZCB0aGUgcHJvYmFiaWxpdHkgb2YgaGF2aW5nIGZvdXIgb3IgbGVzcyBjb3JyZWN0IGFuc3dlcnMgaWYgYSBzdHVkZW50IGF0dGVtcHRzIHRvIGFuc3dlciBldmVyeSBxdWVzdGlvbiBhdCByYW5kb20uDQoNCiMjIyBTb2x1dGlvbg0KDQpFbCBlc3BhY2lvIG11ZXN0cmFsIGVzICpuID0gMTIqICh0d2VsdmUgcXVlc3Rpb25zKS4gRGFkbyBxdWUgc29uIDUgYWx0ZXJuYXRpdmFzIHBhcmEgY2FkYSBwcmVndW50YSwgbGEgcG9zaWJpbGlkYWQgZGUgcmVzcG9uZGVyIGRlIGZvcm1hIGNvcnJlY3RhICh5IGFsZWF0b3JpYSkgZXMgKjEvNT0wLjIqLg0KDQpRdWVyZW1vcyBlbmNvbnRyYXIgNCBvIG1lbm9zIHJlc3B1ZXN0YXMgY29ycmVjdGFzOg0KUChYPTQpICsgUChYPTMpICsgUChYPTIpICsgUChYPTEpICsgUChYPTApLiBFcyBkZWNpciwgdGVuZXIgNCByZXNwdWVzdGEgY29ycmVjdGFzLCAzIHJlc3B1ZXN0YXMgY29ycmVjdGFzLCAyIHJlc3B1ZXN0YXMgY29ycmVjdGFzLC4uLiwgMCBvIG5pbmd1bmEgcmVzcHVlc3RhIGNvcnJlY3RhLiANCg0KQ2FsY3VsZW1vcyBwcmltZXJvIHBhcmEgNCByZXNwdWVzdGFzIGNvcnJlY3RhczoNCmRiaW5vbSh4ID0gNCwgcCA9IDAuMiwgbiA9IDEyKQ0KDQpgYGB7ciwgZXZhbD1UUlVFfQ0KeCA8LSBkYmlub20oeCA9IDQsIHAgPSAwLjIsIHNpemUgPSAxMikNCngNCmBgYA0KDQpDYWxjdWxlbW9zIGVsIHJlc3RvIGRlIHByb2JhYmlsaWRhZGVzOg0KDQpgYGB7ciwgZXZhbD1UUlVFfQ0KY3VtX3ggPC0gZGJpbm9tKDAsIHNpemU9MTIsIHByb2I9MC4yKSArIGRiaW5vbSgxLCBzaXplPTEyLCBwcm9iPTAuMikgKyBkYmlub20oMiwgc2l6ZT0xMiwgcHJvYj0wLjIpICsgZGJpbm9tKDMsIHNpemU9MTIsIHByb2I9MC4yKSArIGRiaW5vbSg0LCBzaXplPTEyLCBwcm9iPTAuMikgDQpjdW1feA0KYGBgDQoNCkFsdGVybmF0aXZhbWVudGUgDQoNCmBgYHtyLGV2YWw9VFJVRX0NCmN1bV94IDwtIHBiaW5vbShxID0gNCwgc2l6ZT0gMTIsIHByb2IgPSAwLjIpDQpjdW1feA0KYGBgDQoNClBvciBsbyB0YW50byBsYSBwb3NpYmlsaWRhZCBkZSByZXNwb25kZXIgNCBvIG1lbm9zIHByZWd1bnRhcyBjb3JyZWN0YW1lbnRlIGRlIGZvcm1hIGFsZWF0b3JpYSB1biBjdWVzdGVvbmFyaW8gZGUgMTIgcHJlZ3VudGFzIGVzICowLjkyNzQ0NDUqDQoNCg0KIyMgR2VvbWV0cmljIFJhbmRvbSBWYXJpYWJsZXMNCg0KYGBge3IsZXZhbD1UUlVFfQ0KY2FzZSA9IGMoMCwxLDIsMyw0KQ0KcG9pbnQgPSBjKDAuMDY4NzE5NDgsIDAuMjA2MTU4NCwgMC4yODM0Njc4LCAwLjIzNjIyMzIsIDAuMTMyODc1NikNCmRhdCA8LSBkYXRhLmZyYW1lKGNhc2UsIHBvaW50LCBzdHJpbmdzQXNGYWN0b3JzID0gRkFMU0UpDQpwbG90KGRhdCRjYXNlLCBkYXQkcG9pbnQsIHR5cGUgPSAiaCIpDQpgYGANCg0KDQoNCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRpc2NyZXRlIFJhbmRvbSBWYXJpYWJsZXMiDQpvdXRwdXQ6DQogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQNCiAgaHRtbF9kb2N1bWVudDogZGVmYXVsdA0KLS0tDQoNCiMgUmFuZG9tIFZhcmlhYmxlDQpBIHJhbmRvbSB2YXJpYWJsZSBpcyBhIGZ1bmN0aW9uIHdoaWNoIGFzc2lnbiBhIHZhbHVlIGZyb20gdGhlIHNhbXBsZSBzcGFjZSB0byByZWFsIG51bWJlcnMuIEl0IHJlbGF0ZXMgdGhlIHZhbHVlIG9mIHRoZSBwcm9iYWJpbGl0eSBhc3NvY2lhdGVkIHdpdGggYW4gZXZlbnQgaW4gdGhlIHNhbXBsZSBzcGFjZS4NCg0KDQojIyBCZXJub3VsbGkgUmFuZG9tIFZhcmlhYmxlDQoNCkNvbnNpZGVyIHRoZSB0b3Mgb2YgYSBjb2luLCB3aGljaCBjb21lcyB1cCBhIGhlYWQgd2l0aCBwcm9iYWJpbGl0eSAqcCosIGFuZCBhIHRhaWwgd2l0aCBwcm9iYWJpbGl0eSAqMS1wKi4gVGhlICpCZXJub3VsbGkqIHJhbmRvbSB2YXJpYWJsZSB0YWtlcyB0aGUgdHdvIHZhbHVlcyAxIGFuZCAwLCBkZXBlbmRpbmcgb24gd2hldGhlciB0aGUgb3V0Y29tZSBpcyBhIGhlYWQgb3IgYSB0YWlsOg0KDQoNCiQkIFggPSB7MSwgaGVhZCBcYnJhY2UgMCwgdGFpbH0gJCQgDQpJdHMgUE1GIGlzLA0KDQokJCBwX3tYfXtrfSA9IHtwLCBrPTEgXGJyYWNlIDEtcCwgaz0wfSAgJCQNCg0KDQojIyBCaW5vbWlhbCBSYW5kb20gVmFyaWFibGUNCg0KQSBjb2luIGlzIHRvc3NlZCBuIHRpbWVzLiBBdCBlYWNoIHRvc3MsIHRoZSBjb2luIGNvbWVzIHVwIGEgaGVhZCB3aXRoIHByb2JhYmlsaXR5ICpwKiwgYW5kIGEgdGFpbCB3aXRoIHByb2JhYmlsaXR5ICoxLXAqLCBpbmRlcGVuZGVudCBvZiBwcmlvciB0b3NzZXMuIExldCAqWCogdGhlIG51bWJlciBvZiBoZWFkcyBpbiB0aGUgbi10b3NzIHNlcXVlbmNlLiBXZSByZWZlciB0byAqWCogYXMgYSAqYmlub21pYWwqIHJhbmRvbSB2YXJpYWJsZSB3aXRoIHBhcmFtZXRlcnMgKm4qIGFuZCAqcCouIFRoZSAqUE1GKiBvZiAqWCogY29uc2lzdCBvZiB0aGUgYmlub21pYWwgcHJvYmFiaWxpdGllcyB0aGF0IHdlcmU6DQoNCg0KJCRwX3tYfShrKSA9IFAoWCA9IGspPSBcYmlub217bn17a31wXntrfSgxLXApXntuLWt9JCQNCkRvbmRlICQkIGsgPSAwLDEsLi4uLG4gJCQNCg0KIyMjIFByb2JsZW0gMS4xDQoNCkluIDEwIHRyaWFscyB3aXRoIHN1Y2Nlc3MgcHJvYmFiaWxpdHkgMC41LCB3aGF0IGlzIHRoZSBwcm9iYWJpbGl0eSB0aGF0IG5vIG1vcmUgdGhhbiA0IHN1Y2Nlc3Mgd2lsIGJlIG9ic2VydmVkPw0KDQojIyMgU29sdXRpb24NCg0KSGVyZSwgbj0xMCwgcCA9IDAuNSwgYW5kIHdlIHdhbnQgdG8gY2FsY3VsYXRlDQoNCiQkIFAoWTw9NCkgPSBGKDQpICAkJA0KDQpXZSBkbyBzbyBpbiBSIGFzIGZvbGxvd3M6DQoNCmBgYHtyLGV2YWw9VFJVRX0NCnJlcyA8LSBwYmlub20ocSA9IDQsIHNpemU9IDEwLCBwcm9iID0gMC41KQ0KcmVzDQpgYGANCg0KDQojIyMgRXhhbXBsZSAxLjINCg0KDQpJbiAxMiB0cmlhbHMgd2l0aCBzdWNjZXNzIHByb2JhYmlsaXR5IDAuMywgd2hhdCBpcyB0aGUgcHJvYmFiaWxpdHkgdGhhdCBtb3JlIHRoYW4gNiBzdWNjZXNzZXMgd2lsbCBiZSBvYnNlcnZlZD8NCg0KIyMjIFNvbHV0aW9uDQoNCkhlcmUsIG4gPSAxMiwgcHJvYj0wLjMgYW5kIFAoNjxZKS4NCg0KU2luY2UgJFAoNjxZKSQsIHRoaXMgY2FuIGJlIHRyYXNsYXRlZCAgJFAoNjxZKSA9IDEgLSBQKFk8PTYpID0gMSAtIEYoNikuJA0KDQpXZSBkbyB0aGlzIHNvIGluIFIgYXMgZm9sbG93czoNCg0KYGBge3IsZXZhbD1UUlVFfQ0KcmVzIDwtIDEtcGJpbm9tKHEgPSA2ICwgc2l6ZT0gMTIsIHByb2IgPSAwLjMpDQpyZXMNCmBgYA0KDQojIyMgUHJvYmxlbWEgMS4zDQoNCkluIDE1IHRyaWFscyB3aXRoIHN1Y2Nlc3MgcHJvYmFiaWxpdHkgMC42LCB3aGF0IGlzIHRoZSBwcm9iYWJpbGl0eSB0aGF0IGF0IGxlYXN0IDUgYnV0IG5vIG1vcmUgdGhhbiAxMCBzdWNjZXNzZXMgd2lsbCBiZSBvYnNlcnZlZD8NCg0KIyMjIFNvbHV0aW9uDQoNCkhlcmUgbiA9IDE1LCBwcm9iPTAuNiwgYW5kIHdlIHdhbnQgdG8gY2FsY3VsYXRlOg0KDQokUCg1PTxZPD0xMCkkLCB0aGlzIGNhbiBiZSB0cmFzbGF0ZWQgdG8gJFAoNTw9WTw9MTApID0gUChYPD0xMCkgLSBQKHg+NCk9IEYoMTApLUYoNCkkDQoNCldlIGRvIHNvIGluIFIgYXMgZm9sbG93czoNCg0KYGBge3IsZXZhbD1UUlVFfQ0KcmVzIDwtIHBiaW5vbSgxMCwgc2l6ZSA9IDE1LCBwcm9iID0gMC42KSAtIHBiaW5vbSg0LCBzaXplID0gMTUsIHByb2IgPSAwLjYpIA0KcmVzDQpgYGANCg0KDQojIyMgUHJvYmxlbSAxLjQNCg0KSW4gMjAgdHJpYWxzIHdpdGggc3VjY2VzcyBwcm9iYWJpbGl0eSAwLjksIHdoYXQgaXMgdGhlIHByb2JhYmlsaXR5IHRoYXQgZXhhY3RseSAxNiBzdWNjZXNzZXMgd2lsbCBiZSBvYnNlcnZlZD8NCg0KIyMjIFNvbHV0aW9uDQoNCiRQKFg9MTYpPVAoWTw9MTYpLVAoWTw9MTUpPUYoMTYpLUYoMTUpJA0KDQoNCldlIGRvIHNvIGluIFIgYXMgZm9sbG93czoNCg0KYGBge3IsIGV2YWw9VFJVRX0NCnJlcyA8LSBwYmlub20oMTYsIHNpemUgPSAyMCwgcHJvYiA9IDAuOSkgLSBwYmlub20oMTUsIHNpemUgPSAyMCwgcHJvYj0wLjkpDQpyZXMNCmBgYA0KDQoNCg0KDQoNCg0KDQoNCiMjIyBQcm9ibGVtIDEuNQ0KDQpTdXBwb3NlIHRoZXJlIGFyZSB0d2VsdmUgbXVsdGlwbGUgY2hvaWNlIHF1ZXN0aW9ucyBpbiBhbiBFbmdsaXNoIGNsYXNzIHF1aXouIEVhY2ggcXVlc3Rpb24gaGFzIGZpdmUgcG9zc2libGUgYW5zd2VycywgYW5kIG9ubHkgb25lIG9mIHRoZW0gaXMgY29ycmVjdC4gRmluZCB0aGUgcHJvYmFiaWxpdHkgb2YgaGF2aW5nIGZvdXIgb3IgbGVzcyBjb3JyZWN0IGFuc3dlcnMgaWYgYSBzdHVkZW50IGF0dGVtcHRzIHRvIGFuc3dlciBldmVyeSBxdWVzdGlvbiBhdCByYW5kb20uDQoNCiMjIyBTb2x1dGlvbg0KDQpFbCBlc3BhY2lvIG11ZXN0cmFsIGVzICpuID0gMTIqICh0d2VsdmUgcXVlc3Rpb25zKS4gRGFkbyBxdWUgc29uIDUgYWx0ZXJuYXRpdmFzIHBhcmEgY2FkYSBwcmVndW50YSwgbGEgcG9zaWJpbGlkYWQgZGUgcmVzcG9uZGVyIGRlIGZvcm1hIGNvcnJlY3RhICh5IGFsZWF0b3JpYSkgZXMgKjEvNT0wLjIqLg0KDQpRdWVyZW1vcyBlbmNvbnRyYXIgNCBvIG1lbm9zIChQKFg8PTQpKSByZXNwdWVzdGFzIGNvcnJlY3RhczoNClAoWD00KSArIFAoWD0zKSArIFAoWD0yKSArIFAoWD0xKSArIFAoWD0wKS4gRXMgZGVjaXIsIHRlbmVyIDQgcmVzcHVlc3RhIGNvcnJlY3RhcywgMyByZXNwdWVzdGFzIGNvcnJlY3RhcywgMiByZXNwdWVzdGFzIGNvcnJlY3RhcywuLi4sIDAgbyBuaW5ndW5hIHJlc3B1ZXN0YSBjb3JyZWN0YS4gDQoNCkNhbGN1bGVtb3MgcHJpbWVybyBwYXJhIDQgcmVzcHVlc3RhcyBjb3JyZWN0YXM6DQpkYmlub20oeCA9IDQsIHAgPSAwLjIsIG4gPSAxMikNCg0KYGBge3IsIGV2YWw9VFJVRX0NCnggPC0gZGJpbm9tKHggPSA0LCBwID0gMC4yLCBzaXplID0gMTIpDQp4DQpgYGANCg0KQ2FsY3VsZW1vcyBlbCByZXN0byBkZSBwcm9iYWJpbGlkYWRlczoNCg0KYGBge3IsIGV2YWw9VFJVRX0NCmN1bV94IDwtIGRiaW5vbSgwLCBzaXplPTEyLCBwcm9iPTAuMikgKyBkYmlub20oMSwgc2l6ZT0xMiwgcHJvYj0wLjIpICsgZGJpbm9tKDIsIHNpemU9MTIsIHByb2I9MC4yKSArIGRiaW5vbSgzLCBzaXplPTEyLCBwcm9iPTAuMikgKyBkYmlub20oNCwgc2l6ZT0xMiwgcHJvYj0wLjIpIA0KY3VtX3gNCmBgYA0KDQpBbHRlcm5hdGl2YW1lbnRlIA0KDQpgYGB7cixldmFsPVRSVUV9DQpjdW1feCA8LSBwYmlub20ocSA9IDQsIHNpemU9IDEyLCBwcm9iID0gMC4yKQ0KY3VtX3gNCmBgYA0KDQpQb3IgbG8gdGFudG8gbGEgcG9zaWJpbGlkYWQgZGUgcmVzcG9uZGVyIDQgbyBtZW5vcyBwcmVndW50YXMgY29ycmVjdGFtZW50ZSBkZSBmb3JtYSBhbGVhdG9yaWEgdW4gY3Vlc3Rlb25hcmlvIGRlIDEyIHByZWd1bnRhcyBlcyAqMC45Mjc0NDQ1Kg0KDQpFbCBncmFmaWNvIGRlIGxhIGRpc3RyaWJ1Y2lvbiBiaW5vbWlhbA0KDQpgYGB7cixldmFsPVRSVUV9DQpjYXNlID0gYygwLDEsMiwzLDQpDQpwb2ludCA9IGMoMC4wNjg3MTk0OCwgMC4yMDYxNTg0LCAwLjI4MzQ2NzgsIDAuMjM2MjIzMiwgMC4xMzI4NzU2KQ0KZGF0IDwtIGRhdGEuZnJhbWUoY2FzZSwgcG9pbnQsIHN0cmluZ3NBc0ZhY3RvcnMgPSBGQUxTRSkNCnBsb3QoZGF0JGNhc2UsIGRhdCRwb2ludCwgdHlwZSA9ICJoIikNCmBgYA0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0K</div>
 
 
 
