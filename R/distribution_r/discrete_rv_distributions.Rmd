@@ -8,6 +8,15 @@ output:
 # Random Variable
 A random variable is a function which assign a value from the sample space to real numbers. It relates the value of the probability associated with an event in the sample space.
 
+## Probability Mass Function (PMF)
+
+In simple terms, the *Probability Mass Function (PMF)* is the probability of a random variable takes a value *x*. 
+
+Mathematically, the *Probability Mass Function (PMF)* is a function that assigns the probability $p_{X}$ of the event *{X=x}* consisting of all *outcomes* (the outcomes are denoted by $\omega$ , $\omega$  belongs to the sample space  $\Omega$), such that $X(w) = x$) that give rise to value of *X* equal to *x*: 
+
+The *PMF* of *x* denoted by $p_{X}(x)= P( \lbrace{X=x}\rbrace )=P(X=x)$
+
+
 
 ## Bernoulli Random Variable
 
@@ -100,11 +109,6 @@ res
 
 
 
-
-
-
-
-
 ### Problem 1.5
 
 Suppose there are twelve multiple choice questions in an English class quiz. Each question has five possible answers, and only one of them is correct. Find the probability of having four or less correct answers if a student attempts to answer every question at random.
@@ -138,11 +142,9 @@ cum_x <- pbinom(q = 4, size= 12, prob = 0.2)
 cum_x
 ```
 
-Por lo tanto la posibilidad de responder 4 o menos preguntas correctamente de forma aleatoria un cuesteonario de 12 preguntas es *0.9274445*
+Por lo tanto la posibilidad de responder 4 o menos preguntas correctamente de forma aleatoria un cuesteonario de 12 preguntas es *0.9274445*. El grafico de la distribucion binomial:
 
-El grafico de la distribucion binomial
-
-```{r,eval=TRUE}
+```{r , fig.align='center'}
 case = c(0,1,2,3,4)
 point = c(0.06871948, 0.2061584, 0.2834678, 0.2362232, 0.1328756)
 dat <- data.frame(case, point, stringsAsFactors = FALSE)
@@ -150,7 +152,18 @@ plot(dat$case, dat$point, type = "h")
 ```
 
 
+## The Geometric Random Variable
 
+We can interpret the geometric random variable in terms of repeated independent trials until the first *success*. Each trial has probabilit of success *p* and the number of trials until (and including) the first success is modeled by the geometric random variable. The meaning of *success* is context-dependent. For example:
+
+- Finding a missing item in a given search.
+- Passing a test in a given try.
+- Finding a adn sequence given an experiment.
+
+
+Suppose that we repeatedly and independently toss a coin with probability of a head equal to p, where *0<p<1*. The *geometric random variable* is the number of $X$ of tosses for a head to come up for the first time. Its PMF is given by:
+
+$p_{X}(k) = (1-p)^{k-1}p$, where $k=1,2,3,4.....$
 
 
 
