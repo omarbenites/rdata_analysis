@@ -1,0 +1,162 @@
+---
+title: "Continous Random Variables"
+output:
+  html_notebook: default
+  html_document: default
+---
+
+A random variable $X$ is called continous if there is a nonnegative function $f_{X}$ called the probability density function of $X$, or PDF for short, such that:
+
+$P(X \in  B ) = \int_{B} f_{X}(x)dx$
+
+For every subset $B$ of the real line. In particular, the probabilit that the value of $X$ falls within an interval is:
+
+$P(a \leq X \leq b ) = \int_{a}^{b} f_{X}(x)$ 
+
+and can be interpreted as the area under the graph of the PDF. For any single value $a$, we have 
+
+$P(X=a)=P(X=b)=0$
+
+For this reason, including or excluding the endpoints of an interval has no effect on its probability:
+
+$$P(a \leq X \leq b ) =  P(a < X \leq b ) = P(a \leq X < b ) = P(a< X < b )$$ 
+
+Note that to qualify as a PDF, a function $f_{X}$ must be nonnegative, i.e,
+
+$f_{X} \geq 0$ for every $x$, and must also have the normalization property:
+
+
+$$\int_{-\infty}^{\infty} f_{X}(x)dx = P(-\inf<X<\inf)=1$$ 
+
+
+### Expectation and Variance of Continous Random Variable and its Properties
+
+
+- Expected value of $X$
+
+$$E[X]=\int_{-\infty}^{\infty}xf_{X}(x)dx$$
+
+
+- The expected value rule for a function $g(X)$ has the form
+
+$$E[g(X)] = \int_{-\infty}^{\infty} g(x)f_{X}(x)dx$$
+
+- The variance of $X$
+
+$$var(X)=E[(X-E[X])^2] = \int_{-\infty}^{\infty}(x-E[X])^{2}f_{X}(x)dx$$ 
+
+- If $Y=aX+b$, where $a$ and $b$ are given scalars, then:
+
+$$E[Y] = aE[X] + b$$ and $$var(Y)= a^{2}var(X)$$
+
+## Types of Random Variable
+
+### Exponential Random Variable
+
+An *exponential* random variable has a PDF of the form:
+
+$$
+f_{X}(x) = {\lambda}e^{- x/ \lambda}\qquad \qquad x > 0,
+$$
+Otherwise, $$f_{X}(x)=0$$
+
+An exponential random variable can, for example, be a good model for the amount of time until an incident of interest takes place, such as a message arriving at a computer, some equipment breaking down, a light bulb burning out, an accident ocurring, etc.
+
+- Expected value
+
+$$  
+E[X] = \frac{1}{\lambda}
+$$
+
+- Variance
+
+$$
+var(X) = \frac{1}{{\lambda}^{2}}
+$$
+
+
+### Cumulative Distribution Functions
+
+
+
+### Normal or Gaussian Distribution Function
+
+A continous random variable $X$ is called *normal* if exists a PDF of the form:
+
+$$
+f_{X}(x) = \frac{1}{\sqrt{2\sigma}} \int_{-\infty}^{\infty} e^{-(x-\mu)^{2}/2\sigma} 
+$$
+
+- Expected value
+
+$$
+E[X] = \mu
+$$
+
+- Variance
+
+$$
+var(X) = {\sigma}^{2}
+$$
+
+- In R we can implement
+
+```{r}
+#Normal distribution
+
+set.seed(3000)
+#generate x values in the real line
+xseq <- seq(-4,4,.01)
+#find the probability density function (PDF)
+densities <- dnorm(xseq, 0,1)
+#cumulative density function (CDF)
+cumulative <- pnorm(xseq, 0, 1)
+#generate a random sample from normal distribution
+randomdeviates <- rnorm(1000,0,1)
+
+# u =0 y variance =1
+plot(xseq, densities, col="darkgreen",xlab="", 
+     ylab="Density", type="l",lwd=2, cex=2, 
+     main="PDF of Standard Normal 1", cex.axis=.8)
+
+# u =0 y variance = 15
+densities <- dnorm(xseq, 0,1.5)
+plot(xseq, densities, col="darkgreen",xlab="", 
+     ylab="Density", type="l",lwd=2, cex=2, 
+     main="PDF of Standard Normal 2", cex.axis=.8)
+
+```
+
+#More generally
+
+```{r}
+set.seed(3000)
+#vector of X values from the real line
+xseq<-seq(-4,4,.01)
+#PDF
+densities<-dnorm(xseq, 0,1)
+#CDF
+cumulative<-pnorm(xseq, 0, 1)
+#random numbers from the normal distribution
+randomdeviates<-rnorm(1000,0,1)
+ 
+par(mfrow=c(1,3), mar=c(3,4,4,2))
+
+plot(xseq, densities, col="darkgreen",xlab="", ylab="Density", type="l",lwd=2, cex=2, main="PDF of Standard Normal", cex.axis=.8)
+
+plot(xseq, cumulative, col="darkorange", xlab="", ylab="Cumulative Probability",type="l",lwd=2, cex=2, main="CDF of Standard Normal", cex.axis=.8)
+
+hist(randomdeviates, main="Random draws from Std Normal", cex.axis=.8, xlim=c(-4,4))
+```
+
+
+
+
+### Standard Normal Random Variable
+
+
+$$
+var(X) = {\sigma}^{2}
+$$
+
+
