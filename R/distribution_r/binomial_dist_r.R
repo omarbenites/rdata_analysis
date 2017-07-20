@@ -15,9 +15,10 @@ densities <- dbinom(x = xseq, size = 10, prob = 0.1)
 cumulative <- pbinom(q = xseq, size = 10, prob = 0.1)
 
 #generate a random sample from normal distribution
-randomdeviates <- rbinom(n = 10,size = 10, prob = 0.5) 
+randomdeviates <- rbinom(n = 10,  size = 10, prob = 0.5 ) 
 
 #Plot Binomial distribution
 
 barplot(height = densities, names.arg = xseq)
 plot(xseq ,height = cumulative, names.arg = xseq)
+plot()
