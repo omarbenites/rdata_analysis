@@ -6,7 +6,7 @@ set.seed(3000)
 xseq <- seq(0,4,by = 1)
 
 #### Find the probability mass function (PDF)
-#x: 
+#x: number of sucess for each trial
 #size: number of trials
 #probability of sucess: 0.1
 densities <- dbinom(x = xseq, size = 10, prob = 0.1)
