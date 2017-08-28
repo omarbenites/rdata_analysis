@@ -1,0 +1,28 @@
+---
+title: "Joint and Marginal Probability"
+output: html_notebook
+---
+
+## Introduction
+
+Probabilistic models often involve several random variables. For example, in a medical diagnosis context, the results of several test may be significant. Indeed, all these variables are associated with the same experiment, sample space, and probability law, and their values may relate in interesting ways.
+
+Considerer a random variables *X* and Y associated with the same experiment. The probabilities of the values that *X* and *Y* can take are captured by the **joint probability**, denoted by $p_{X,Y}$. In particular, if $(x,y)$ is a pair of possible values of $X$ and $Y$, the probability of $(x,y)$ is the probability of the event $\lbrace{ X = x, Y = y \rbrace }$ :
+
+$$ p_{X,Y}(x,y)=P(X=x, Y=y)$$
+
+IMPORTANT: The more precise notation  of the statement above is $$ p_{X,Y}(x,y)=P(X=x, Y=y) = P(\lbrace{X=x}\rbrace \cap   \lbrace{Y=y}\rbrace)$$
+
+#See an example in
+
+- https://rstudio-pubs-static.s3.amazonaws.com/209289_9f9ba331cccc4e8f8aabdb9273cc76af.html
+
+
+```{r}
+plot(cars)
+```
+
+
+### Bibliography
+
+- https://rstudio-pubs-static.s3.amazonaws.com/209289_9f9ba331cccc4e8f8aabdb9273cc76af.html.
