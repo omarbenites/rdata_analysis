@@ -1,0 +1,20 @@
+---
+title: "Poisson Distribution"
+output:
+  html_notebook: default
+  html_document: default
+---
+
+# Poisson Distribution
+
+From prior data we can estimate the average number of events per unit of time or space, but we might also want to know how different this might be from one unit of time/space to another. 
+
+
+From prior data we can estimate the average number of events per unit of time or space, but we might also want to know how different this might be from one unit of time/space to another. The Poisson distribution tells us the distribution of events per unit of time or space, when we sample many such units. It is useful when addressing queuing questions like **how much capacity do we need to be 95% sure of fully processing the internet traffic that arrives on a server in any 5 second period.**
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+```{r}
+plot(cars)
+```
+

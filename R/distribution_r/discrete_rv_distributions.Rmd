@@ -167,12 +167,22 @@ $p_{X}(k) = (1-p)^{k-1}p$, where $k=1,2,3,4.....$
 
 
 
+## Poisson Distribution
+
+From prior data we can estimate the average number of events per unit of time or space, but we might also want to know how different this might be from one unit of time/space to another. The Poisson distribution tells us the distribution of events per unit of time or space, when we sample many such units. It is useful when addressing queuing questions like **how much capacity do we need to be 95% sure of fully processing the internet traffic that arrives on a server in any 5 second period.** [2].
+
+
+The key parameter in a Poisson distribution is $\lambda$, or lambda. This is the mean number of events that occurs in a specified interval of time or space. The variance for a Poisson distribution is also $\lambda$.
 
 
 
 
 
 
+# Bibliography
 
+[1] Introduction to Probability-Dimitri P. Bertsekas, John N. Tsitsiklis  2nd Edition
+
+[2] Practical Statistics for Data Scientists 50 Essential Concepts Peter Bruce, Andrew Bruce 
 
 
