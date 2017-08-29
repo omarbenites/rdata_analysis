@@ -172,11 +172,29 @@ $p_{X}(k) = (1-p)^{k-1}p$, where $k=1,2,3,4.....$
 From prior data we can estimate the average number of events per unit of time or space, but we might also want to know how different this might be from one unit of time/space to another. The Poisson distribution tells us the distribution of events per unit of time or space, when we sample many such units. It is useful when addressing queuing questions like **how much capacity do we need to be 95% sure of fully processing the internet traffic that arrives on a server in any 5 second period.** [2].
 
 
-The key parameter in a Poisson distribution is $\lambda$, or lambda. This is the mean number of events that occurs in a specified interval of time or space. The variance for a Poisson distribution is also $\lambda$.
+Mathematically, a random variable $X$, taking on one of the values $0, 1, 2, ... ,$ is said to be a $Poisson Random Variable$ with parameter $\lambda$, if for some $\lambda >0$, the P.M.F is:
 
 
+$P_{X}(k) = e^{-\lambda}\frac{\lambda^{k}}{k!}$
 
 
+The key parameter in a Poisson distribution is $\lambda$, or lambda. This is the expected value ($E(X)$) or mean number of events that occurs in a specified interval of time or space. The variance ($Var(X)$) for a Poisson distribution is also $\lambda$.
+
+
+## R implementation of Poisson Random Variable
+
+A common technique is to generate random numbers from a Poisson distribution as part of a queuing simulation. The `rpois` function in R does this, taking only two arguments - the quantity of random numbers sought, and lambda:
+
+```{r}
+#Poisson random numbers
+prn <- rpois(100, lambda = 2)
+prn
+```
+```{r}
+hist(prn)
+```
+
+This code will generate $100$ random numbers from a Poisson distribution with $λ = 2$. For example, if incoming customer service calls average two per minute, this code will simulate $100$ minutes, returning the number of calls in each of those $100$ minutes.
 
 
 # Bibliography
@@ -185,4 +203,4 @@ The key parameter in a Poisson distribution is $\lambda$, or lambda. This is the
 
 [2] Practical Statistics for Data Scientists 50 Essential Concepts Peter Bruce, Andrew Bruce 
 
-
+[3] Basic Probability Distributions in R https://rstudio-pubs-static.s3.amazonaws.com/100906_8e3a32dd11c14b839468db756cee7400.html
