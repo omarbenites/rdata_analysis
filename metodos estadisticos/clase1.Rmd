@@ -1,0 +1,146 @@
+---
+title: "Metodos Estadistico - Clase 1"
+output:
+  html_document:
+    toc: yes
+  html_notebook:
+    theme: united
+    toc: yes
+---
+
+# Conceptos Basicos
+
+1. **Poblacion**: Es el conjunto de todos los elementos que se desee analizar y que presentan una o varias caracteristicas en comun.
+
+2. **Muestra**: Es el subconjunto representativo de elementos provinientes de una poblacion.
+
+3. **Unidad Experimental**: Es cada uno de las personas, animales, cosas o identidades que conforman la poblacion de estudio.
+
+4. **Variables** : Es toda caracteristica que se desea observar, medir o evaluar de las unidades experimentales.
+
+Las variables pueden clasificarse en cuantitativas o cualitativas
+
+
+1. **Variables Cualitativas**: Estas variables se dividen en: 
+  i) **Nominales**: Son aquellas que definen un atributo de un elemento o unidad de          estudio. 
+  * Ejemplo: El color de pulpa del camote, puede ser morada, amarilla o naranja.
+  ii) **Ordinales**: Son aquellas que expresan un atributo, y ademas, tambien pueden ser ordenadas. 
+  
+  + Ejemplo: Dosis de fertilizante, las cuales pueden ser baja, mediana y alta. Estos valores expresan una cualidad y su vez pueden ordenarse por la intensidad de la dosis.
+
+
+2. **Variables Cuantitativas**: Son aquelals que expresan una cantidad. Estas se dividen en continuas y discretas.
+
+ i) Cuantitativas discretas: Son aquellas que tienen un numero finito o infinito numerable de valores posibles. Por lo general se obtienen mediante conteos.
+  
+ - **Finito Numerable**: Tiene un rango finito
+ - **Ranfo Infinito Numerable**: Se caracterizan porque no tiene un maximo. Ejemplo,       Numero de accidentes en un mes.
+
+ ii) Cuantitativas continuas: Son aquellas que tienen un numero infinito no numerable de valores posibles. Por lo general se obtienen mediante instrumentos de medición.
+
+## Conceptos relacionados a poblacion
+
+* **Observacion** : Es el datos registrado producto de la medicion o apreciacion de una caracteristica en una unidad experimental. 
+
+* **Parametro ** : ($\mu$, $\beta$, $\pi$, $\sigma$). Es una medida que resume los datos provinientes de la poblacion. Es decir es una funcion de todas las observaciones de una poblacion. *Ej.*: Luego de realizar un censo a las famlias del distrito de San Borja se obtuvo que el ingreso familiar promedio mensual es  8563.60 soles.
+
+* **Estadistica, Estadistico o Estadigrafo** : Es una medida que resume los datos provinientes de la muestra. *Ej.*: Luego de realizar un muestreo a 30 familias del distrito de San Borja se obtuvo que el ingreso promedio familiar es 6452.30 soles.
+
+
+## Estadistica Descriptiva
+
+Son tecnicas de recolección, caracterización, resumen y presentación que permiten describir un conjunto de datos. Con un analisis descriptivo se pueden obtener indicadores (estimaciones puntuales), tablas de frecuencia (o contingencia) y graficos.
+
+Para realizar un analisis descriptivo se debe tener en cuenta el tipo de variable (cuantitativo o cualitativo) y la cantidad de variables que se esta analizando (univarida, bivariada y multivariada).
+
+### Analisis Descriptivo de Variables Categoricas
+
+#### Tabla de Frecuencias
+
+Cargamos los datos en R
+
+```{r, message=FALSE}
+library(agricolae)
+library(dplyr)
+set.seed(1234)
+datos <- readRDS("D:/OMAR_2016/R_Repos/rdata_analysis/data/yacon_caj.rds")
+#color de pulpa (cpula): 0 es rojo, 1 es morado, 2 es blanco
+#infectados: 0 is heathly and 1 is infected
+cpulpa <- rbinom(n = nrow(datos),size = 2, prob = 0.6)
+infectados <- rbinom(n = nrow(datos),size = 1, prob = 0.6)
+nplantas <- rbinom(n = nrow(datos),size = 8, prob = 0.6)
+datos$colorPulpa <- as.factor(cpulpa)
+datos$infectados <- as.factor(infectados)
+datos$nplantas <- as.integer(nplantas)
+```
+
+- Calculamos la tabla de frecuencia para la variable color de pulpa
+
+```{r}
+# Elaborar una tabla de frecuencia 
+tabla1 <- table(datos$colorPulpa)
+tabla1
+```
+
+Frecuencias porcentuales del color de pulpa 
+```{r}
+#color de pulpa (cpula): 0 es rojo, 1 es morado, 2 es blanco
+n<-sum(tabla1)
+tabla1/n
+```
+
+- Calculamos la tabla de frecuencia para la variable infectados
+
+```{r}
+#infectados: 0 is heathly and 1 is infected
+# Elaborar una tabla de frecuencia 
+tabla2 <- table(datos$infectados)
+tabla2
+```
+
+Frecuencias porcentuales de los infectados
+
+```{r}
+n<-sum(tabla2)
+tabla2/n
+```
+
+
+#### Tabla de Contingencia
+```{r}
+tabla3 <- table(datos$colorPulpa, datos$infectados)
+tabla3
+```
+
+Para visualizar una tabla de contigencia podemos usar 2 tipos de graficos:
+
+##### Grafico Circular 
+```{r}
+pie(tabla3, col = c(1,3))
+```
+
+##### Grafico de Barras
+
+```{r}
+barplot(tabla3)
+```
+
+### Análisis Descriptivo de Variables Cuantitativas
+
+#### Variables cuantitativas discretas
+
+- Gráfico de Lineas
+
+```{r}
+p2 <- table(datos$nplantas) 
+plot(unique(numplants), p2, type = "h")
+```
+
+
+#### Variables cuantitativas continuas
+
+<!-- - -->
+<!-- ```{r} -->
+<!-- library(agricolae) -->
+<!-- tabla4 <- table.freq(datos$nplantas) -->
+
